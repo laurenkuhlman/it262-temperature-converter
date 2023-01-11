@@ -11,7 +11,7 @@
   <form action="" method="POST">
     <fieldset>
       <p>
-          Temperature to convert from <input type="number" name="temp_from" />
+          Temperature to Convert from <input type="number" name="temp_from" />
       </p>
     </fieldset>
     <fieldset>
