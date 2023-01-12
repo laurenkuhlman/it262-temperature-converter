@@ -1,43 +1,39 @@
-<!DOCTYPE HTML>  
-<html>
-  <head>
-    <style>
-      * {
-        background-color: beige
-      }
-    </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
   </head>
+
   <body>
+
   <form action="" method="POST">
+    <h2>Temperature Converter</h2>
     <fieldset>
-      <p>
-          Temperature to Convert from <input type="number" name="temp_from" />
-      </p>
+      <label>Temperature to Convert</label>
+      <input type="number" name="temp_from" />
+
+        <label>Convert From:</label>
+        <ul>
+          <li><input type="radio" name="scale_from" value="f" /> Fahrenheit</ul>
+          <li><input type="radio" name="scale_from" value="c" /> Celsius</ul>
+          <li><input type="radio" name="scale_from" value="k" /> Kelvin</ul>
+        </ul>
+
+        <label>Convert To:</label>
+        <ul>
+          <li><input type="radio" name="scale_to" value="f" /> Fahrenheit</ul>
+          <li><input type="radio" name="scale_to" value="c" /> Celsius</ul>
+          <li><input type="radio" name="scale_to" value="k" /> Kelvin</ul>
+        </ul>
     </fieldset>
-    <fieldset>
-      <p>
-        <input type="radio" name="scale_from" value="f" />Fahrenheit
-      </p>
-      <p>
-        <input type="radio" name="scale_from" value="c" />Celsius
-      </p>
-      <p>
-        <input type="radio" name="scale_from" value="k" />Kelvin
-      </p>
-    </fieldset>
-    <fieldset>
-      <p>
-        <input type="radio" name="scale_to" value="f" />Fahrenheit
-      </p>
-      <p>
-        <input type="radio" name="scale_to" value="c" />Celsius
-      </p>
-      <p>
-        <input type="radio" name="scale_to" value="k" />Kelvin
-      </p>
-    </fieldset>
+
     <input type="submit" />
   </form>
+
     <?php
       //form.php
       echo '';
@@ -61,14 +57,24 @@
         } elseif ($scale_from == "k" && $scale_to == "f") {
             $result = ($temp_from * (9/5)) - 459.67;
         } else {
-            echo "Please select a valid conversion type.";
+            echo "<p class='error'>Please complete entire form.</p>";
         }
      
-        if (is_numeric($result)) {
-            echo $temp_from . '°'.strtoupper($scale_from).' = ' . round($result, 2) . '°'.strtoupper($scale_to);
-        } else {
-            echo "Please enter a valid number.";
+        // Will not show result unless form is complete
+        if(!empty($temp_from && $scale_from && $scale_to)) {
+          echo '
+          <div class="box">
+            <p>'.$temp_from .'°'.strtoupper($scale_from).' = '.round($result, 2).'°'.strtoupper($scale_to).'</p>
+          </div>
+          ';
         }
+
+
+        // if (is_numeric($result)) {
+        //     echo $temp_from . '°'.strtoupper($scale_from).' = ' . round($result, 2) . '°'.strtoupper($scale_to);
+        // } else {
+        //     echo "<p class='error'>Please enter a valid number.</p>";
+        // }
         // echo '<pre>';
         // var_dump ( $_POST );
         // echo '</pre>';
