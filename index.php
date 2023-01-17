@@ -81,8 +81,11 @@
     $scale_to = $_POST["scale_to"];
     $result = 0;
 
-    if ($scale_from == "f" && $scale_to == "c") {
+    if ( !is_numeric ( $temp_from ) ) {
+      echo "<p class='error'>Please complete entire form.</p>";
+    } elseif ($scale_from == "f" && $scale_to == "c" ) {
       $result = ($temp_from - 32) * (5 / 9);
+    //   echo 'f to c'.$result;
     } elseif ($scale_from == "c" && $scale_to == "f") {
       $result = ($temp_from * (9 / 5)) + 32;
     } elseif ($scale_from == "c" && $scale_to == "k") {
@@ -96,17 +99,30 @@
     } else {
       echo "<p class='error'>Please complete entire form.</p>";
     }
-
-    if (!empty($temp_from && $scale_from && $scale_to)) {
+    
+    if (
+      is_numeric (
+        $temp_from
+      ) &&
+      is_numeric (
+        $result
+      ) &&
+      !empty (
+        $scale_from
+      ) &&
+      !empty (
+        $scale_to
+      )
+    ) {
       echo '
     <div class="box">
-      <p>' . $temp_from . '°' . strtoupper($scale_from) . ' = ' . round($result, 2) . '°' . strtoupper($scale_to) . '</p>
+      <p>' . $temp_from . ' degrees ' . strtoupper($scale_from) . ' = ' . round($result, 2) . ' degrees ' . strtoupper($scale_to) . '</p>
     </div>
           ';
     }
 
     // if (is_numeric($result)) {
-    //   echo $temp_from . '°' . strtoupper($scale_from) . ' = ' . round($result, 2) . '°' . strtoupper($scale_to);
+    //   echo $temp_from . ' degrees ' . strtoupper($scale_from) . ' = ' . round($result, 2) . ' degrees ' . strtoupper($scale_to);
     // } else {
     //   echo "Please enter a valid number.";
     // }
