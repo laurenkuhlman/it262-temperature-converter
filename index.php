@@ -141,7 +141,7 @@
         ) {
           echo '
             <div class="box">
-            <p>' . $temp_from . '°' . strtoupper($scale_from) . ' = ' . round($result, 2) . '°' . strtoupper($scale_to) . '</p>
+            <p>' . $temp_from . '&#176' . strtoupper($scale_from) . ' = ' . round($result, 2) . '&#176' . strtoupper($scale_to) . '</p>
             </div>
           ';
         }
